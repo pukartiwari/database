@@ -1,0 +1,20 @@
+Create database store_database;
+##this is for creating customer table
+use store_database;
+create table customer( id int auto_increment not null, name varchar(45) not null,email varchar(45) not null,address varchar(45),primary key (id));
+
+##creating table of product
+create table product( id int auto_increment not null,quantity int,product_name varchar(45) not null, price DECIMAL (5,2),primary key(id));
+insert into product(`quantity`,`product_name`,`price`) values ("200","biscuits","20"),("400","noodles","30"),("100","momos","40");
+select * from product;
+create table orders(
+id int not null auto_increment,
+customer_id int not null,
+product_id int not null,
+foreign key(customer_id) references customer(id),
+foreign key(product_id) references product(id),
+primary key(id));
+insert into orders(`customer_id`,`product_id`) values ("2,2"),("4,1");
+##joining the tables
+select * from orders;
+select customer.name, orders.* from customer inner join orders on customer.id=orders.customer_id;
